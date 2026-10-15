@@ -1,0 +1,9 @@
+[project]
+name = "rag-document-assistant"
+version = "0.1.0"
+description = "Upload PDFs and ask questions in English or Turkish, with page-level citations."
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
