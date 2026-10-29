@@ -202,3 +202,19 @@ def test_ask_returns_503_when_api_key_missing(client, monkeypatch):
 
     assert response.status_code == 503
     assert "GROQ_API_KEY" in response.json()["detail"]
+
+
+# --- web UI ---------------------------------------------------------------
+
+
+def test_home_page_serves_the_web_ui(client):
+    response = client.get("/")
+
+    assert response.status_code == 200
+    assert "text/html" in response.headers["content-type"]
+    assert "Drop PDF files here" in response.text
+
+
+@pytest.mark.parametrize("path", ["/static/app.js", "/static/styles.css"])
+def test_static_files_are_served(client, path):
+    assert client.get(path).status_code == 200

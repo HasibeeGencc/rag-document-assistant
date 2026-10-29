@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Document Assistant</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span>Document Assistant</span>
+      </div>
+      <span class="tagline">Ask your PDFs, in English or Turkish</span>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <!-- Left column: upload + document list -->
+    <section class="panel" aria-labelledby="docs-title">
+      <h2 id="docs-title">1. Add your documents</h2>
+
+      <label id="dropzone" class="dropzone" for="file-input">
+        <input id="file-input" type="file" accept="application/pdf,.pdf" multiple hidden>
+        <svg class="dropzone-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
+                fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="dropzone-title">Drop PDF files here</span>
+        <span class="dropzone-hint">or <u>click to choose</u> · up to 20 MB each</span>
+      </label>
+
+      <ul id="upload-status" class="upload-status" aria-live="polite"></ul>
+
+      <h3 class="list-title">Your documents <span id="doc-count" class="count"></span></h3>
+      <ul id="doc-list" class="doc-list"></ul>
+      <p id="doc-empty" class="empty">No documents yet. Upload a PDF to get started.</p>
+    </section>
+
+    <!-- Right column: ask + answer -->
+    <section class="panel" aria-labelledby="ask-title">
+      <h2 id="ask-title">2. Ask a question</h2>
+
+      <form id="ask-form" class="ask-form">
+        <label for="question" class="visually-hidden">Your question</label>
+        <textarea id="question" rows="3" maxlength="2000" required
+                  placeholder="e.g. When is the invoice due?  /  Fatura ne zaman ödenmeli?"></textarea>
+        <div class="ask-actions">
+          <span class="hint">Press Enter to ask · Shift+Enter for a new line</span>
+          <button id="ask-button" type="submit" class="button-primary">Ask</button>
+        </div>
+      </form>
+
+      <div id="answer-area" class="answer-area" aria-live="polite" hidden>
+        <div id="answer" class="answer"></div>
+        <div id="sources-block" hidden>
+          <h3 class="list-title">Sources</h3>
+          <ol id="sources" class="sources"></ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
