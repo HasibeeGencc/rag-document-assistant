@@ -8,7 +8,7 @@ from app.llm.base import LLMError
 from app.llm.factory import get_llm
 from app.llm.gemini_provider import GeminiProvider
 from app.llm.groq_provider import GroqProvider
-from app.rag.pipeline import NOT_FOUND_EN, NOT_FOUND_TR, RAGPipeline, looks_turkish
+from app.rag.pipeline import NOT_FOUND_EN, NOT_FOUND_TR, RAGPipeline, detect_language
 from app.vectorstore.chroma_store import ChromaStore
 from tests.fakes import FakeEmbedder, FakeLLM
 
@@ -141,9 +141,29 @@ def test_empty_question_is_rejected(store):
         RAGPipeline(store, FakeLLM()).ask("   ")
 
 
-def test_looks_turkish():
-    assert looks_turkish("Şirket nerede?")
-    assert not looks_turkish("Where is the company?")
+@pytest.mark.parametrize(
+    "question, language",
+    [
+        ("Şirket nerede?", "tr"),
+        ("fatura ne zaman odenmeli", "tr"),  # Turkish typed without Turkish letters
+        ("Where is the company?", "en"),
+        ("How long is customer data kept?", "en"),
+    ],
+)
+def test_detect_language(question, language):
+    assert detect_language(question) == language
+
+
+@pytest.mark.parametrize(
+    "question, language",
+    [("How long is data kept?", "English"), ("Veriler ne kadar saklanır?", "Turkish")],
+)
+def test_prompt_names_the_answer_language(store, question, language):
+    llm = FakeLLM()
+
+    RAGPipeline(store, llm).ask(question)
+
+    assert f"Write your entire answer in {language}" in llm.calls[0][1]
 
 
 # --- providers ------------------------------------------------------------

@@ -1,0 +1,2 @@
+# Only needed to regenerate the sample PDFs (eval/make_sample_pdfs.py)
+fpdf2>=2.8

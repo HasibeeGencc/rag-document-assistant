@@ -32,6 +32,14 @@ Rules:
 CITATION_RE = re.compile(r"\[([^\[\]]+?),\s*(?:p|s)\.\s*(\d+)\]")
 # Letters that appear in Turkish but not English.
 TURKISH_CHARS = set("çğıöşüÇĞİÖŞÜ")
+# Common Turkish question and function words, for questions typed without
+# Turkish letters (e.g. "fatura ne zaman odenmeli").
+TURKISH_WORDS = {
+    "ne", "nedir", "neden", "nasil", "nerede", "nereye", "hangi", "kim", "kac",
+    "mi", "mu", "midir", "var", "yok", "ve", "ile", "icin", "bir", "bu", "su",
+    "zaman", "gibi", "veya", "ama", "olan", "olarak",
+}
+LANGUAGE_NAMES = {"en": "English", "tr": "Turkish"}
 
 
 class Source(BaseModel):
@@ -47,9 +55,14 @@ class Answer(BaseModel):
     sources: list[Source]
 
 
-def looks_turkish(text: str) -> bool:
-    """Rough check, used only to pick the language of our own fallback message."""
-    return any(ch in TURKISH_CHARS for ch in text)
+def detect_language(text: str) -> str:
+    """Return "tr" or "en". The app only supports these two languages, so a
+    simple check is enough: Turkish letters, or common Turkish words.
+    """
+    if any(ch in TURKISH_CHARS for ch in text):
+        return "tr"
+    words = set(re.findall(r"[a-z]+", text.lower()))
+    return "tr" if words & TURKISH_WORDS else "en"
 
 
 def build_user_prompt(question: str, results: list[SearchResult]) -> str:
@@ -57,7 +70,15 @@ def build_user_prompt(question: str, results: list[SearchResult]) -> str:
         f"[Passage {i}] {r.chunk.filename}, p. {r.chunk.page}\n{r.chunk.text}"
         for i, r in enumerate(results, start=1)
     )
-    return f"Context:\n\n{passages}\n\nQuestion: {question}"
+    # Name the language explicitly and put it last, right after the question.
+    # When the context is in another language, models otherwise tend to copy
+    # the context's language (found by the evaluation in eval/).
+    language = LANGUAGE_NAMES[detect_language(question)]
+    return (
+        f"Context:\n\n{passages}\n\nQuestion: {question}\n\n"
+        f"The question is in {language}. Write your entire answer in {language}, "
+        f"translating facts from the context if needed."
+    )
 
 
 def extract_sources(answer: str, results: list[SearchResult]) -> list[Source]:
@@ -108,7 +129,7 @@ class RAGPipeline:
         if not results:
             # Nothing uploaded (or nothing in the chosen documents): don't
             # spend an LLM request on a question that can't be answered.
-            message = NOT_FOUND_TR if looks_turkish(question) else NOT_FOUND_EN
+            message = NOT_FOUND_TR if detect_language(question) == "tr" else NOT_FOUND_EN
             return Answer(answer=message, sources=[])
 
         reply = self._llm.complete(SYSTEM_PROMPT, build_user_prompt(question, results))

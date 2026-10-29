@@ -1,0 +1,31 @@
+[
+  {"id": 1, "question": "When was Acme Analytics founded?", "lang": "en", "doc": "acme_employee_handbook.pdf", "page": 1},
+  {"id": 2, "question": "Who should I contact with questions about a policy?", "lang": "en", "doc": "acme_employee_handbook.pdf", "page": 1},
+  {"id": 3, "question": "What are the core working hours?", "lang": "en", "doc": "acme_employee_handbook.pdf", "page": 2},
+  {"id": 4, "question": "How many days a week can I work from home?", "lang": "en", "doc": "acme_employee_handbook.pdf", "page": 2},
+  {"id": 5, "question": "Can I carry over unused holiday to next year?", "lang": "en", "doc": "acme_employee_handbook.pdf", "page": 3},
+  {"id": 6, "question": "By what time must I tell my manager that I am sick?", "lang": "en", "doc": "acme_employee_handbook.pdf", "page": 3},
+  {"id": 7, "question": "What is the daily meal allowance when travelling?", "lang": "en", "doc": "acme_employee_handbook.pdf", "page": 4},
+  {"id": 8, "question": "How long do I have to return my laptop after leaving?", "lang": "en", "doc": "acme_employee_handbook.pdf", "page": 5},
+  {"id": 9, "question": "How long must a password be?", "lang": "en", "doc": "acme_employee_handbook.pdf", "page": 5},
+
+  {"id": 10, "question": "Nova Yazılım'ın merkezi nerede?", "lang": "tr", "doc": "nova_hizmet_sozlesmesi.pdf", "page": 1},
+  {"id": 11, "question": "Sözleşme ne kadar süre geçerli?", "lang": "tr", "doc": "nova_hizmet_sozlesmesi.pdf", "page": 1},
+  {"id": 12, "question": "Aylık hizmet ücreti ne kadar?", "lang": "tr", "doc": "nova_hizmet_sozlesmesi.pdf", "page": 2},
+  {"id": 13, "question": "Fatura kaç gün içinde ödenmeli?", "lang": "tr", "doc": "nova_hizmet_sozlesmesi.pdf", "page": 2},
+  {"id": 14, "question": "Gecikme faizi oranı nedir?", "lang": "tr", "doc": "nova_hizmet_sozlesmesi.pdf", "page": 2},
+  {"id": 15, "question": "Teknik destek hangi saatlerde verilir?", "lang": "tr", "doc": "nova_hizmet_sozlesmesi.pdf", "page": 3},
+  {"id": 16, "question": "Planlı bakım ne zaman yapılır?", "lang": "tr", "doc": "nova_hizmet_sozlesmesi.pdf", "page": 3},
+  {"id": 17, "question": "Sözleşmeyi feshetmek için kaç gün önceden bildirim gerekir?", "lang": "tr", "doc": "nova_hizmet_sozlesmesi.pdf", "page": 4},
+
+  {"id": 18, "question": "How long does it take to fully charge the speaker?", "lang": "en", "doc": "solaris_x2_user_manual.pdf", "page": 1},
+  {"id": 19, "question": "Is a wall charger included in the box?", "lang": "en", "doc": "solaris_x2_user_manual.pdf", "page": 1},
+  {"id": 20, "question": "How many hours does the battery last?", "lang": "en", "doc": "solaris_x2_user_manual.pdf", "page": 2},
+  {"id": 21, "question": "How do I reset the speaker to factory settings?", "lang": "en", "doc": "solaris_x2_user_manual.pdf", "page": 3},
+
+  {"id": 22, "question": "Yılda kaç gün ücretli izin hakkım var?", "lang": "tr", "cross_lingual": true, "doc": "acme_employee_handbook.pdf", "page": 3},
+  {"id": 23, "question": "Masrafları kaç gün içinde göndermeliyim?", "lang": "tr", "cross_lingual": true, "doc": "acme_employee_handbook.pdf", "page": 4},
+  {"id": 24, "question": "Hoparlörün garanti süresi ne kadar?", "lang": "tr", "cross_lingual": true, "doc": "solaris_x2_user_manual.pdf", "page": 3},
+  {"id": 25, "question": "How long is customer data kept after the contract ends?", "lang": "en", "cross_lingual": true, "doc": "nova_hizmet_sozlesmesi.pdf", "page": 4},
+  {"id": 26, "question": "What uptime does the service provider guarantee?", "lang": "en", "cross_lingual": true, "doc": "nova_hizmet_sozlesmesi.pdf", "page": 3}
+]
