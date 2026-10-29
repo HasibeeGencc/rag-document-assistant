@@ -20,9 +20,7 @@ the answer, the assistant says so instead of making one up.
 It runs at zero cost: the embedding model and vector database run locally, and
 answers come from the free tier of [Groq](https://console.groq.com) (or Gemini as a backup).
 
-<!-- Screenshot: save it as docs/screenshot.png, then replace this comment with:
-![Screenshot of the web UI](docs/screenshot.png) -->
-> Screenshot and live demo link: coming soon.
+![Screenshot of the web UI: an answer with a citation chip and its source passage](docs/screenshot.png)
 
 ## What it does
 
