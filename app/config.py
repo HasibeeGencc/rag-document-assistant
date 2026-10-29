@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     embedding_model: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
     chroma_dir: str = "data/chroma"
 
+    max_upload_mb: int = 20
+
 
 @lru_cache
 def get_settings() -> Settings:
