@@ -1,3 +1,14 @@
+---
+title: RAG Document Assistant
+emoji: 📄
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 7860
+pinned: false
+short_description: Ask PDFs questions in English or Turkish, with citations
+---
+
 # RAG Document Assistant
 
 [![CI](https://github.com/HasibeeGencc/rag-document-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/HasibeeGencc/rag-document-assistant/actions/workflows/ci.yml)
