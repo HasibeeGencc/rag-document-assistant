@@ -29,3 +29,15 @@ class FakeEmbedder:
 
     def embed_query(self, text: str) -> list[float]:
         return self._embed(text)
+
+
+class FakeLLM:
+    """Returns a fixed reply and records every prompt it was sent."""
+
+    def __init__(self, reply: str = "fake answer"):
+        self.reply = reply
+        self.calls: list[tuple[str, str]] = []  # (system, user) pairs
+
+    def complete(self, system: str, user: str) -> str:
+        self.calls.append((system, user))
+        return self.reply
